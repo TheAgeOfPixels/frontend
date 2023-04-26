@@ -185,7 +185,7 @@ body {
 
 
 .richard-section__hero-image {
-    margin: 3em 1.2em 1.2em 1.2em;
+    padding: 1em;
 }
 
 .richard-section__title {
@@ -280,6 +280,7 @@ body {
     .richard-section__hero-image {
         width: 40%;
         object-fit: contain;
+        padding: 3em;
     }
 
     .richard-section__title {
