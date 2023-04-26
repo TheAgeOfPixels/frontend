@@ -200,6 +200,35 @@ body {
     line-height: 1.2;
 }
 
+.neon .pixel-button {
+    width: 250px;
+}
+
+
+/* targeting tablets and larger screens */
+/* 768px by default */
+@media (min-width: 48rem) {
+
+    /* second area */
+    .richard-section {
+        flex-direction: row-reverse;
+    }
+
+    .richard-section__wrapper {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: unset;
+    }
+
+    .richard-section__hero-image {
+        padding: 1em;
+        width: 50%;
+        object-fit: contain;
+    }
+}
+
 /* targeting laptops and larger screens */
 /* 992px by default */
 @media (min-width: 62rem) {
@@ -289,5 +318,9 @@ body {
 
     .richard-section__info {
         font-size: 1.5rem;
+    }
+
+    .neon .pixel-button {
+        margin-top: 1rem;
     }
 }
