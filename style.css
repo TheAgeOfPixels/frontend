@@ -184,8 +184,6 @@ body {
     padding-top: 2rem;
 }
 
-
-
 .richard-section__hero-image {
     padding: 1em;
     max-width: 25rem;
@@ -207,6 +205,16 @@ body {
     width: 250px;
 }
 
+/* third area */
+.roadmap-section {
+    display: flex;
+    margin: 3rem 0;
+}
+
+.roadmap-section__map {
+    object-fit: contain;
+    width: 100%;
+}
 
 /* targeting tablets and larger screens */
 /* 768px by default */
