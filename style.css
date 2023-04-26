@@ -176,16 +176,19 @@ body {
 /* second area */
 .richard-section {
     display: flex;
+    align-items: center;
     flex-direction: column;
     position: relative;
     background-image: url(image/section2bg.png), linear-gradient(169deg, rgb(10 20 60) 27%, rgb(47 18 56) 87%);
     text-align: center;
+    padding-top: 2rem;
 }
 
 
 
 .richard-section__hero-image {
     padding: 1em;
+    max-width: 25rem;
 }
 
 .richard-section__title {
@@ -226,6 +229,7 @@ body {
         padding: 1em;
         width: 50%;
         object-fit: contain;
+        max-width: unset;
     }
 }
 
