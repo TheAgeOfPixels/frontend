@@ -217,6 +217,23 @@ body {
     width: 100%;
 }
 
+.map {
+    width: 100%;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+svg [id^=_]:hover,
+svg [id^=_]:active {
+    fill: burlywood;
+    fill-opacity: 0.5;
+    stroke: rgb(224, 197, 42);
+    stroke-opacity: 0.5;
+}
+
 /* targeting tablets and larger screens */
 /* 768px by default */
 @media (min-width: 48rem) {

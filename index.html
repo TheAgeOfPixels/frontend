@@ -62,13 +62,67 @@
 
         <!-- second area -->
         <section class="roadmap-section">
-            <img class="roadmap-section__map" src="./image/roadmap.png" alt="roadmap">
+            <load-file replaceWith src="auto">
+                <style shadowRoot>
+                    .an:hover {
+                        filter: url(#f1);
+                    }
+                </style>
+            </load-file>
         </section>
 
 
 
     </main>
     <footer class="footer"></footer>
+
+    <script>
+
+        customElements.define("load-file", class extends HTMLElement {
+
+            // declare default connectedCallback as async so await can be used
+            async connectedCallback(
+                // call connectedCallback with parameter to *replace* SVG (of <load-file> persists)
+                // attach a shadowRoot if none exists (prevents displaying error when moving Nodes)
+                // declare as parameter to save 4 Bytes: 'let '
+                shadowRoot = this.shadowRoot || this.attachShadow({ mode: "open" })
+            ) {
+                var src;
+                if (window.matchMedia("(max-width: 48rem)").matches) {
+                    src = 'http://127.0.0.1:8887/mobile-map.svg'
+                } else {
+                    src = 'http://127.0.0.1:8887/desktop-map.svg'
+                }
+                // load SVG file from src="" async, parse to text, add to shadowRoot.innerHTML
+                shadowRoot.innerHTML = await (await fetch(src)).text()
+
+                // append optional <tag [shadowRoot]> Elements from <load-svg> innerHTML/lightDOM after parsed <svg>
+                shadowRoot.append(...this.querySelectorAll("[shadowRoot]"))
+
+                // if "replaceWith" attribute exists
+                // then replace <load-svg> with loaded content <load-svg>
+                // childNodes instead of children to include #textNodes also
+                this.hasAttribute("replaceWith") && this.replaceWith(...shadowRoot.childNodes)
+
+                var event = new CustomEvent("svgLoaded", {});
+                document.dispatchEvent(event);
+            }
+        })
+    </script>
+
+    <script>
+        document.addEventListener("svgLoaded", function (e) {
+            const lands = Array.from(document.querySelectorAll('svg [id^=land_]'))
+                .forEach((land) => {
+                    land.addEventListener('ontouchstart', () => {
+                        land.style.fill = 'burlywood';
+                        land.style.fillOpacity = '0.5';
+                        land.style.stroke = 'rgb(224, 197, 42)';
+                        land.style.strokeOpacity = '0.5';
+                    })
+                })
+        });
+    </script>
 </body>
 
 </html>
