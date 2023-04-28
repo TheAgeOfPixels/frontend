@@ -89,9 +89,9 @@
             ) {
                 var src;
                 if (window.matchMedia("(max-width: 48rem)").matches) {
-                    src = 'http://127.0.0.1:8887/mobile-map.svg'
+                    src = '/image/map/mobile-map.svg'
                 } else {
-                    src = 'http://127.0.0.1:8887/desktop-map.svg'
+                    src = '/image/map/desktop-map.svg'
                 }
                 // load SVG file from src="" async, parse to text, add to shadowRoot.innerHTML
                 shadowRoot.innerHTML = await (await fetch(src)).text()
