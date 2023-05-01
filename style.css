@@ -52,7 +52,6 @@ body {
 
     height: 80%;
     width: 100%;
-
 }
 
 .header__logo {
@@ -75,6 +74,7 @@ body {
 /* first area */
 
 .castle-section {
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -88,15 +88,15 @@ body {
 .castle-section::after {
     content: '';
     position: absolute;
+    bottom: 0;
     left: 0;
     z-index: 2;
-    top: 100%;
     background-image: url(image/richard-separator.png);
     background-size: contain;
     background-repeat: repeat-x;
-    height: 8%;
+    height: 4rem;
     width: 100%;
-    transform: translateY(-50%);
+    transform: translateY(50%);
 }
 
 .main__hero {
