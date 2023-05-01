@@ -272,17 +272,23 @@ svg,
     align-content: center;
     flex-direction: column;
     flex-direction: column;
-    padding: 0 33%;
+    margin: 0 17%;
     font-size: 0.7rem;
 
 }
 
 .stage p {
     text-align: justify;
+    width: 15ch;
+}
+
+.stage h3 {
+    width: 14ch;
+    margin-bottom: 10px;
 }
 
 .blur {
-    filter: blur(3px);
+    filter: blur(4px);
 }
 
 
@@ -412,6 +418,10 @@ svg,
         font-size: 5rem;
     }
 
+    .map {
+        padding-top: 0;
+    }
+
 
     .stage {
         width: 50%;
@@ -419,5 +429,10 @@ svg,
         padding: 0 10%;
         font-size: 1.2rem;
         background-image: url(image/map/mini-map.svg);
+    }
+
+    .stage h3,
+    .stage p {
+        width: unset;
     }
 }
