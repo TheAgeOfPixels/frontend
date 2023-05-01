@@ -62,7 +62,16 @@
 
         <!-- third area -->
         <section class="roadmap-section">
+            <h1 class="roadmap__title">Roadmap</h1>
+            <p class="roadmap__detail">Click at each land to sea each stage of our roadmap!</p>
             <div id="map" class="map"></div>
+            <div class="stages hide">
+                <div class="stage hide stage1">
+                    <h3>Deploying testnet</h3>
+                    <p>In this stage we have planned to deploy our game into ETH testnet(Goerli) chain. The reason for
+                        choosing Goerli is becuase Opensea testnet is on that network too</p>
+                </div>
+            </div>
         </section>
 
 
@@ -78,21 +87,23 @@
             if (entries[0].isIntersecting === true) {
                 observer.unobserve(entries[0].target);
                 //
-                const perform = async (size) => {
+                const perform = async (size, triggerEvent = false) => {
                     var src;
                     if (size == 'mobile') {
-                        src = '/image/map/mobile-map.svg'
+                        src = 'http://127.0.0.1:8887/image/map/mobile-map.svg'
                         window.mapSize = 'mobile'
                     } else {
-                        src = '/image/map/desktop-map.svg'
+                        src = 'http://127.0.0.1:8887/image/map/desktop-map.svg'
                         window.mapSize = 'desktop'
                     }
 
                     map.innerHTML = await (await fetch(src, { 'cache': 'default' })).text()
-                    var event = new CustomEvent("svgLoaded", {});
-                    document.dispatchEvent(event);
+                    if (triggerEvent) {
+                        var event = new CustomEvent("svgLoaded", {});
+                        document.dispatchEvent(event);
+                    }
                 }
-                perform((isMobile() ? 'mobile' : 'desktop'));
+                perform((isMobile() ? 'mobile' : 'desktop'), true);
 
                 window.addEventListener('resize', () => {
                     if (window.mapSize !== undefined) {
@@ -107,19 +118,37 @@
         }, { threshold: [0], rootMargin: "400px 0px" });
 
         observer.observe(document.querySelector('.roadmap-section'));
-    </script>
 
-    <script>
         document.addEventListener("svgLoaded", function (e) {
             const lands = Array.from(document.querySelectorAll('svg [id^=land]'))
-                .forEach((land) => {
-                    land.addEventListener('ontouchstart', () => {
-                        land.style.fill = 'burlywood !important';
-                        land.style.fillOpacity = '0.5';
-                        //land.style.stroke = 'rgb(224, 197, 42)';
-                        //land.style.strokeOpacity = '0.5';
-                    })
+            lands.forEach((land) => {
+                land.addEventListener('ontouchstart', () => {
+                    land.style.fill = 'burlywood !important';
+                    land.style.fillOpacity = '0.5';
+                    //land.style.stroke = 'rgb(224, 197, 42)';
+                    //land.style.strokeOpacity = '0.5';
                 })
+            })
+
+            const stages = document.querySelector('.stages');
+            const stage = document.querySelector('.stage1');
+            const map = document.querySelector('.map');
+            lands.forEach((land) => {
+                land.addEventListener('click', () => {
+                    console.log('stage1')
+                    stage.classList.toggle('hide');
+                    stages.classList.toggle('hide');
+                    map.classList.toggle('blur');
+                })
+            })
+
+            window.addEventListener('click', function (e) {
+                if (e.target == stages) {
+                    stage.classList.toggle('hide');
+                    stages.classList.toggle('hide');
+                    map.classList.toggle('blur');
+                }
+            });
         });
     </script>
 </body>

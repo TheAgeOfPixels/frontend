@@ -210,11 +210,19 @@ body {
 .roadmap-section {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url(image/map/map-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    text-align: center;
 }
 
-.roadmap-section__map {
-    object-fit: contain;
-    width: 100%;
+
+.roadmap__title {
+    margin-top: 2rem;
 }
 
 svg,
@@ -224,7 +232,7 @@ svg,
 }
 
 .map {
-    margin: 2rem 0.5rem;
+    padding: 2rem 0.5rem;
 }
 
 [id^=land]:hover,
@@ -233,10 +241,48 @@ svg,
     fill-opacity: 0.5;
 }
 
-.roadmap-section {
-    background-image: url(image/map/map-bg.jpg);
+.roadmap__detail {
+    margin: 0.5rem;
+}
+
+.hide {
+    display: none !important;
+}
+
+.stages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+
+}
+
+.stage {
+    background-image: url(image/map/mini-map-mobile.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    flex-direction: column;
+    padding: 0 33%;
+    font-size: 0.7rem;
+
+}
+
+.stage p {
+    text-align: justify;
+}
+
+.blur {
+    filter: blur(3px);
 }
 
 
@@ -358,5 +404,20 @@ svg,
 
     .neon .pixel-button {
         margin-top: 1rem;
+    }
+
+
+    /* thrid area */
+    .roadmap__title {
+        font-size: 5rem;
+    }
+
+
+    .stage {
+        width: 50%;
+        height: 58%;
+        padding: 0 10%;
+        font-size: 1.2rem;
+        background-image: url(image/map/mini-map.svg);
     }
 }
