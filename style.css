@@ -176,7 +176,7 @@ body {
 /* second area */
 .richard-section {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     flex-direction: column;
     position: relative;
     background-image: url(image/section2bg.png), linear-gradient(169deg, rgb(10 20 60) 27%, rgb(47 18 56) 87%);
@@ -224,7 +224,7 @@ svg,
 }
 
 .map {
-    margin: 2rem 0;
+    margin: 2rem 0.5rem;
 }
 
 [id^=land]:hover,
@@ -330,7 +330,7 @@ svg,
         border-radius: 0.5rem;
     }
 
-    /*.neon::after {
+    .neon::after {
         content: '';
         position: absolute;
         width: 35%;
@@ -340,7 +340,7 @@ svg,
         transform: translate(3rem, 3rem);
         box-shadow: 2px 2px 2px 0px #fff, inset -2px -2px 2px 0px #fff, 12px 12px 10px -4px #9c00ff, inset -12px -12px 10px -4px #9c00ff;
         border-radius: 0.5rem;
-    }*/
+    }
 
     .richard-section__hero-image {
         width: 40%;

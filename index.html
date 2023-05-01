@@ -74,9 +74,9 @@
         const isMobile = () => window.matchMedia("(max-width: 48rem)").matches;
 
         const observer = new IntersectionObserver((entries) => {
+            const map = document.getElementById('map')
             if (entries[0].isIntersecting === true) {
                 observer.unobserve(entries[0].target);
-                const map = document.getElementById('map')
                 //
                 const perform = async (size) => {
                     var src;
