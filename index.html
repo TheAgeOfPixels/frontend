@@ -60,15 +60,9 @@
             </div>
         </section>
 
-        <!-- second area -->
+        <!-- third area -->
         <section class="roadmap-section">
-            <load-file replaceWith src="auto">
-                <style shadowRoot>
-                    .an:hover {
-                        filter: url(#f1);
-                    }
-                </style>
-            </load-file>
+            <div id="map"></div>
         </section>
 
 
@@ -77,48 +71,53 @@
     <footer class="footer"></footer>
 
     <script>
+        const isMobile = () => window.matchMedia("(max-width: 48rem)").matches;
 
-        customElements.define("load-file", class extends HTMLElement {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting === true) {
+                observer.unobserve(entries[0].target);
+                const map = document.getElementById('map')
+                //
+                const perform = async (size) => {
+                    var src;
+                    if (size == 'mobile') {
+                        src = 'http://127.0.0.1:8887/image/map/mobile-map.svg'
+                        window.mapSize = 'mobile'
+                    } else {
+                        src = 'http://127.0.0.1:8887/image/map/desktop-map.svg'
+                        window.mapSize = 'desktop'
+                    }
 
-            // declare default connectedCallback as async so await can be used
-            async connectedCallback(
-                // call connectedCallback with parameter to *replace* SVG (of <load-file> persists)
-                // attach a shadowRoot if none exists (prevents displaying error when moving Nodes)
-                // declare as parameter to save 4 Bytes: 'let '
-                shadowRoot = this.shadowRoot || this.attachShadow({ mode: "open" })
-            ) {
-                var src;
-                if (window.matchMedia("(max-width: 48rem)").matches) {
-                    src = '/image/map/mobile-map.svg'
-                } else {
-                    src = '/image/map/desktop-map.svg'
+                    map.innerHTML = await (await fetch(src, { 'cache': 'default' })).text()
+                    var event = new CustomEvent("svgLoaded", {});
+                    document.dispatchEvent(event);
                 }
-                // load SVG file from src="" async, parse to text, add to shadowRoot.innerHTML
-                shadowRoot.innerHTML = await (await fetch(src)).text()
+                perform((isMobile() ? 'mobile' : 'desktop'));
 
-                // append optional <tag [shadowRoot]> Elements from <load-svg> innerHTML/lightDOM after parsed <svg>
-                shadowRoot.append(...this.querySelectorAll("[shadowRoot]"))
-
-                // if "replaceWith" attribute exists
-                // then replace <load-svg> with loaded content <load-svg>
-                // childNodes instead of children to include #textNodes also
-                this.hasAttribute("replaceWith") && this.replaceWith(...shadowRoot.childNodes)
-
-                var event = new CustomEvent("svgLoaded", {});
-                document.dispatchEvent(event);
+                window.addEventListener('resize', () => {
+                    if (window.mapSize !== undefined) {
+                        const current = (isMobile() ? 'mobile' : 'desktop')
+                        if (window.mapSize != current) {
+                            perform(current)
+                        }
+                    }
+                });
+                //
             }
-        })
+        }, { threshold: [0], rootMargin: "300px 0px" });
+
+        observer.observe(document.querySelector('.roadmap-section'));
     </script>
 
     <script>
         document.addEventListener("svgLoaded", function (e) {
-            const lands = Array.from(document.querySelectorAll('svg [id^=land_]'))
+            const lands = Array.from(document.querySelectorAll('svg [id^=land]'))
                 .forEach((land) => {
                     land.addEventListener('ontouchstart', () => {
-                        land.style.fill = 'burlywood';
+                        land.style.fill = 'burlywood !important';
                         land.style.fillOpacity = '0.5';
-                        land.style.stroke = 'rgb(224, 197, 42)';
-                        land.style.strokeOpacity = '0.5';
+                        //land.style.stroke = 'rgb(224, 197, 42)';
+                        //land.style.strokeOpacity = '0.5';
                     })
                 })
         });

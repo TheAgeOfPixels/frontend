@@ -181,11 +181,11 @@ body {
     position: relative;
     background-image: url(image/section2bg.png), linear-gradient(169deg, rgb(10 20 60) 27%, rgb(47 18 56) 87%);
     text-align: center;
-    padding-top: 2rem;
+    padding: 2rem 0;
 }
 
 .richard-section__hero-image {
-    padding: 1em;
+    padding: 1rem;
     max-width: 25rem;
 }
 
@@ -205,11 +205,11 @@ body {
     width: 250px;
 }
 
+
 /* third area */
 .roadmap-section {
     display: flex;
     justify-content: center;
-    margin: 3rem 0;
 }
 
 .roadmap-section__map {
@@ -217,22 +217,24 @@ body {
     width: 100%;
 }
 
+svg,
 .map {
-    width: 100%;
-}
-
-svg {
     width: 100%;
     height: 100%;
 }
 
-svg [id^=_]:hover,
-svg [id^=_]:active {
-    fill: burlywood;
+[id^=land]:hover,
+[id^=land]:active {
+    fill: burlywood !important;
     fill-opacity: 0.5;
-    stroke: rgb(224, 197, 42);
-    stroke-opacity: 0.5;
 }
+
+.roadmap-section {
+    background-image: url(image/map/map-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 
 /* targeting tablets and larger screens */
 /* 768px by default */
@@ -339,7 +341,7 @@ svg [id^=_]:active {
     .richard-section__hero-image {
         width: 40%;
         object-fit: contain;
-        padding: 3em;
+        /*padding: 3rem;*/
     }
 
     .richard-section__title {
