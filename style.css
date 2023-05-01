@@ -233,6 +233,7 @@ svg,
 
 .map {
     padding: 2rem 0.5rem;
+    cursor: pointer;
 }
 
 [id^=land]:hover,
@@ -257,7 +258,6 @@ svg,
     position: fixed;
     inset: 0;
     z-index: 5;
-
 }
 
 .stage {
@@ -314,6 +314,11 @@ svg,
         width: 50%;
         object-fit: contain;
         max-width: unset;
+    }
+
+    /* third area */
+    .stage {
+        margin: 0 28%;
     }
 }
 

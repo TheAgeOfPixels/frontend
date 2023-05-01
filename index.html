@@ -71,6 +71,34 @@
                     <p>In this stage we have planned to deploy our game into ETH testnet(Goerli) chain. The reason for
                         choosing Goerli is becuase Opensea testnet is on that network too</p>
                 </div>
+                <div class="stage hide stage2">
+                    <h3>Deploying mainnet</h3>
+                    <p>In this stage we deploy the game to ETH mainnet</p>
+                </div>
+                <div class="stage hide stage3">
+                    <h3>Deploying mainnet</h3>
+                    <p>In this stage we deploy the game to ETH mainnet</p>
+                </div>
+                <div class="stage hide stage4">
+                    <h3>Deploying mainnet</h3>
+                    <p>In this stage we deploy the game to ETH mainnet</p>
+                </div>
+                <div class="stage hide stage5">
+                    <h3>Deploying mainnet</h3>
+                    <p>In this stage we deploy the game to ETH mainnet</p>
+                </div>
+                <div class="stage hide stage6">
+                    <h3>Coming Soon!</h3>
+                    <p>check out later!</p>
+                </div>
+                <div class="stage hide stage7">
+                    <h3>Coming Soon!</h3>
+                    <p>check out later!</p>
+                </div>
+                <div class="stage hide stage8">
+                    <h3>Coming Soon!</h3>
+                    <p>check out later!</p>
+                </div>
             </div>
         </section>
 
@@ -90,10 +118,10 @@
                 const perform = async (size, triggerEvent = false) => {
                     var src;
                     if (size == 'mobile') {
-                        src = './image/map/mobile-map.svg'
+                        src = 'http://127.0.0.1:8887/image/map/mobile-map.svg'
                         window.mapSize = 'mobile'
                     } else {
-                        src = './image/map/desktop-map.svg'
+                        src = 'http://127.0.0.1:8887/image/map/desktop-map.svg'
                         window.mapSize = 'desktop'
                     }
 
@@ -131,20 +159,28 @@
             })
 
             const stages = document.querySelector('.stages');
-            const stage = document.querySelector('.stage1');
+            const stage = Array.from(document.querySelectorAll('.stage'));
             const map = document.querySelector('.map');
+            console.log(stage)
+            var toggledID;
             lands.forEach((land) => {
+                const id = land.id.replace('land', '');
+                console.log(id)
                 land.addEventListener('click', () => {
-                    console.log('stage1')
-                    stage.classList.toggle('hide');
+                    console.log('toggled')
+                    console.log(stage)
+                    stage[id - 1].classList.toggle('hide');
                     stages.classList.toggle('hide');
                     map.classList.toggle('blur');
+                    toggledID = id - 1;
                 })
             })
 
             window.addEventListener('click', function (e) {
+
                 if (e.target == stages) {
-                    stage.classList.toggle('hide');
+                    console.log('hid')
+                    stage[toggledID].classList.toggle('hide');
                     stages.classList.toggle('hide');
                     map.classList.toggle('blur');
                 }
